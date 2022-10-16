@@ -1,0 +1,4 @@
+com\example\sonda\SondaApplication.class
+com\example\sonda\controller\SondaController.class
+com\example\sonda\model\SondaModel.class
+com\example\sonda\repository\SondaRepository.class
