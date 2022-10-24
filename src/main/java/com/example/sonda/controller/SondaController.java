@@ -17,7 +17,7 @@ public class SondaController {
     SondaService sondaService;
 
 
-    // EndPoint POST() --> adiciona uma nova sonda em nosso DataBase
+
 
     @PostMapping("/")
     public ResponseEntity<Object> adicionaSonda(@RequestBody SondaModel sondaModelJson){
@@ -29,19 +29,19 @@ public class SondaController {
     }
 
 
-    // EndPoint GET() --> retorna uma lista com todas as sondas cadastradas no DataBase
+  
     @GetMapping("/")
     public ResponseEntity<List> mostrarSondas(){
         return ResponseEntity.status(HttpStatus.OK).body(sondaService.findAll());
     }
 
-    //EndPoint GET() param: {id} --> retorna uma sonda de acordo com o Id passado como parametro
+   
     @GetMapping("/{id}")
     public ResponseEntity<Object> encontrarSonda(@PathVariable UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(sondaService.findById(id));
     }
 
-    //EndPoint PUT() param: {id} --> encontra a sonda pelo Id e atualiza seus dados
+   
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> atualizarDadosSonda(@PathVariable UUID id, @RequestBody SondaModel sonda){
@@ -53,18 +53,15 @@ public class SondaController {
         return ResponseEntity.status(HttpStatus.OK).body(sondaService.save(sondaModelTemp));
     }
 
-    //EndPoint GET() param: {id} param: {comando} --> busca uma sonda no DataBase pelo ID e invoca o metodo
-    //followCommands, que passado uma String de comando, a sonda realiza sua movimentação, retorna os dados
-    //atualizados na sonda original
+    
 
-
-    @GetMapping("/{id}/{comando}")
+    @PutMapping("/{id}/{comando}")
     public ResponseEntity<Object> enviarComandosSonda(@PathVariable UUID id, @PathVariable String comando){
         SondaModel sondaModelTemp = sondaService.findById(id);
         sondaModelTemp.followCommands(comando);
         return ResponseEntity.status(HttpStatus.OK).body(sondaService.save(sondaModelTemp));
     }
-    //EndPoint DELETE() param: {id} -> remove uma sonda de acordo com o seu Id
+   
 
    @DeleteMapping("/{id}")
     public ResponseEntity<Object> deletarSonda(@PathVariable UUID id){
